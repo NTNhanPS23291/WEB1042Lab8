@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="FormCheck">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/form.css">
+    <script src="https://kit.fontawesome.com/dfbcd3590d.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="js/form.js"></script>
+    <title>Form - Nguyễn Thiện Nhân - PS23291</title>
+</head>
+
+<body ng-controller="FormCheckController">
+    <div class="container">
+        <div class="box" ng-class="blurClass">
+            <form name="formSignup" novalidate ng-submit="formCheck($event)" action="#" class="form-layout formSignup">
+                <h3 class="heading">đăng ký thành viên</h3>
+                <div class="form">
+                    <div class="info-container">
+                        <label class="info" for="msv">Mã sinh viên</label>
+                        <input class="input" type="text" name="mssv" required minlength="7" maxlength="7"
+                            ng-model="info.mssv">
+                        <p class="error" ng-show="formSignup.mssv.$invalid && formSignup.mssv.$dirty">
+                            Nhập MSSV gồm 7 ký tự
+                        </p>
+                    </div>
+                    <div class="info-container">
+                        <label class="info" for="msv">Họ và tên</label>
+                        <input name="signupName" class="input" type="text" required minlength="2" maxlength="30"
+                            ng-model="info.name">
+                        <p class="error" ng-show="formSignup.signupName.$invalid && formSignup.signupName.$dirty">
+                            Nhập họ tên từ 2 đến 30 ký tự
+                        </p>
+                    </div>
+                    <div class="info-container">
+                        <label class="info" for="msv">Email</label>
+                        <input class="input" type="email" name="email" required ng-model="info.email">
+                        <p class="error" ng-show="formSignup.email.$invalid && formSignup.email.$dirty">
+                            Vui lòng nhập email hợp lệ
+                        </p>
+                    </div>
+                    <div class="info-container">
+                        <label class="info" for="msv">Giới tính</label>
+                        <div class="input choice-box">
+                            <input class="choice" type="radio" name="gender" id="male" value="nam"
+                                ng-model="info.gender">
+                            <label class="choice" for="male">Nam</label>
+                            <input class="choice" type="radio" name="gender" id="female" value="nu"
+                                ng-model="info.gender">
+                            <label class="choice" for="female">Nữ</label>
+                        </div>
+                        <p class="error" ng-show="formSignup.gender.$dirty && !info.gender">Chọn giới tính</p>
+                    </div>
+                    <div class="info-container">
+                        <label class="info" for="msv">Sở thích</label>
+                        <div class="input choice-box">
+                            <input class="choice" type="checkbox" name="hobby" ng-model="info.hobby.book">
+                            <label class="choice">Đọc sách</label>
+                            <input class="choice" type="checkbox" name="hobby" ng-model="info.hobby.travel">
+                            <label class="choice">Du lịch</label>
+                            <input class="choice" type="checkbox" name="hobby" ng-model="info.hobby.food">
+                            <label class="choice">Ẩm thực</label>
+                            <input class="choice" type="checkbox" name="hobby" ng-model="info.hobby.music">
+                            <label class="choice">Âm nhạc</label>
+                            <input class="choice" type="checkbox" name="hobby" ng-model="info.hobby.others">
+                            <label class="choice">Khác</label>
+                        </div>
+                        <p class="error"
+                            ng-show="!info.hobby.book && !info.hobby.travel && !info.hobby.food && !info.hobby.music && !info.hobby.others">
+                            Sở thích của bạn là gì ?
+                        </p>
+                    </div>
+                    <div class="info-container">
+                        <label class="info" for="msv">Quốc tịch</label>
+                        <select class="input choice-box" name="nationality" ng-model="info.nationality">
+                            <option value="0">Chọn quốc tịch</option>
+                            <option value="1">Mỹ</option>
+                            <option value="2">Nhật Bản</option>
+                            <option value="3">Việt Nam</option>
+                        </select>
+                        <p class="error"
+                            ng-show="formSignup.nationality.$dirty && info.nationality == 0 || !info.nationality">Hãy
+                            chọn quốc tịch của bạn</p>
+                    </div>
+                    <div class="info-container">
+                        <label class="info" for="msv">Ghi chú</label>
+                        <textarea class="input" name="description" type="text" maxlength="500"
+                            ng-model="info.description"></textarea>
+                        <p class="error" ng-show="formSignup.description.$dirty && info.description > 500">Tối đa chỉ
+                            được 500 ký tự</p>
+                    </div>
+                    <div class="btn-box">
+                        <button class="btn" type="submit">Đăng kí</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div ng-show="formValid" class="popup-container">
+            <div class="popup-correct">
+                <i class="fa-regular fa-circle-check"></i>
+                <h3 class="popup-correct-header">Đã ghi nhận thông tin !</h3>
+                <button class="popup-correct-btn" type="button" ng-click="switch()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
